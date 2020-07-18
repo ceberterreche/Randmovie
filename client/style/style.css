@@ -1,0 +1,280 @@
+
+
+.myMovie-list::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+}
+.myMovie-list::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+/* Handle */
+.myMovie-list::-webkit-scrollbar-thumb {
+  background: #1eb4b4;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.myMovie-list::-webkit-scrollbar-thumb:hover {
+  background: #ffcb8f;
+  border-radius: 10px;
+}
+
+.profile {
+  box-sizing: border-box;
+  height: 100vh;
+  width: 100%;
+  z-index: 1;
+  padding-left: 50px;
+  display: flex;
+  flex-direction: row;
+}
+
+.profile-left {
+  box-sizing: border-box;
+  flex-basis: 70%;
+  min-width: 900px;
+  max-height: 100%;
+}
+
+.profile-left .inner {
+  box-sizing: border-box;
+  padding: 40px 0 40px 40px;
+  height: 100%;
+}
+
+.myMovie-list {
+  display: flex;
+  overflow: auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  height: 100%;
+}
+
+.myMovie {
+  padding: 20px 40px 0 0;
+}
+
+.myMovie-list img {
+  width: 230px;
+  border-radius: 10px;
+}
+
+.profile-right {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 90px 40px 90px;
+  margin: auto;
+}
+.stats {
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 1290px) {
+  .profile {
+    flex-direction: column-reverse;
+  }
+
+  .profile-right {
+    flex-direction: row;
+  }
+
+  .discover {
+    margin-top: 0px;
+  }
+}
+
+.stats progress {
+  border-radius: 20px !important;
+  width: 200px;
+  height: 15px;
+  color: green;
+  position: relative;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #ffffff;
+  border-radius: 20px;
+}
+progress::-webkit-progress-value {
+  background: #1eb4b4;
+  border-radius: 20px;
+}
+
+.discover {
+  margin-top: 40px;
+}
+
+.discover-list {
+  width: 100%;
+}
+
+.discover-list .myMovie img {
+  width: 115px;
+}
+
+.profile:hover + .random-movie {
+  transition: ease-out all 1s;
+  transform: translate(-900px, 0);
+}
+
+.random-movie {
+  width: 957px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  background-color: white;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 20px 20px 0px;
+  z-index: 2;
+  transition: ease-out all 1s;
+}
+
+.background-poster {
+  transition: all ease-out 1s;
+  width: 100%;
+  height: 238px;
+  background-image: url('./assets/interstellar.jpg');
+  background-repeat: no-repeat;
+  background-position: right;
+  border-radius: 0px 20px 0px 0px;
+  background-size: 70%;
+  position: relative;
+  z-index: 0;
+}
+.note-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.note {
+  border: solid 6px rgb(35, 179, 16);
+  text-align: center;
+  line-height: 70px;
+  color: white;
+  height: 70px;
+  margin-right: 40px;
+  font-size: 40px;
+  width: 70px;
+  position: absolute;
+  right: 0;
+  border-radius: 100%;
+  z-index: 3;
+}
+
+.note2 {
+  border: solid 6px #c92e2e;
+}
+
+.note4 {
+  border: solid 6px #c96f2e;
+}
+
+.note6 {
+  border: solid 6px #b9c92e;
+}
+
+.note8 {
+  border: solid 6px #a7c92e;
+}
+
+.note10 {
+  border: solid 6px #71c92e;
+}
+
+.background-poster::after {
+  z-index: 1;
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 1) 35%,
+    rgba(0, 255, 3, 0) 100%
+  );
+}
+
+.background-wrapper {
+  position: relative;
+  z-index: 2;
+}
+
+.poster {
+  border-radius: 10px;
+  box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
+  height: 315px;
+  width: 210px;
+  background-image: url('./assets/interstellar.jpg');
+  background-size: contain;
+  background-position: center;
+  transition: all ease-out 0.5s;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  background-repeat: no-repeat;
+}
+
+.movie-infos {
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 40px;
+  left: 40px;
+}
+
+.infos-container {
+  padding: 40px;
+}
+.infos {
+  max-width: 550px;
+  color: white;
+  overflow: hidden;
+}
+
+.infos p {
+  display: inline-block;
+}
+
+.infos h1 {
+  font-size: 40px;
+}
+
+.synopsis-container {
+  margin: 150px 40px 40px 40px;
+  height: 200px;
+}
+
+.synopsis {
+  margin: 20px 0;
+}
+
+.choice-container {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex: 50%;
+}
+
+.choice-btn {
+  width: 273px;
+  height: 74px;
+  color: white;
+  text-align: center;
+  line-height: 74px;
+  cursor: pointer;
+  border-radius: 20px;
+  margin: 0 100px 50px 100px;
+}
+
+.like {
+  background: #80bc64;
+}
+
+.dislike {
+  background: #c5501e;
+}
