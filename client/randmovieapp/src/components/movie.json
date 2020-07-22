@@ -1,0 +1,14 @@
+{
+  "movies": [
+    {
+      "user": "655346",
+      "title": "interstellar",
+      "poster_path": "efg/fdgsdfg/dsfg.png",
+      "overview": "qspdfv,kq",
+      "vote_average": "8",
+      "release_date": "07/10/2005",
+      "liked": true,
+      "genres": ["action", "aventure"]
+    }
+  ]
+}

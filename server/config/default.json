@@ -1,0 +1,4 @@
+{
+  "mongoURI": "mongodb+srv://randcedric:rand19@randmovie.hlvlw.mongodb.net/randmovie?retryWrites=true&w=majority",
+  "jwtSecret": "lOjKabVsc15PCpe26EwalpKXWzsghx"
+}

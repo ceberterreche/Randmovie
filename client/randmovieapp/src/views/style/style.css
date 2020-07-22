@@ -1,4 +1,6 @@
-
+body {
+  --main-color: #1eb4b4;
+}
 
 .myMovie-list::-webkit-scrollbar {
   width: 5px;
@@ -11,7 +13,7 @@
 
 /* Handle */
 .myMovie-list::-webkit-scrollbar-thumb {
-  background: #1eb4b4;
+  background: var(--main-color);
   border-radius: 10px;
 }
 
@@ -26,6 +28,7 @@
   height: 100vh;
   width: 100%;
   z-index: 1;
+  cursor: pointer;
   padding-left: 50px;
   display: flex;
   flex-direction: row;
@@ -95,11 +98,11 @@
 }
 
 progress::-webkit-progress-bar {
-  background-color: #ffffff;
+  background-color: white;
   border-radius: 20px;
 }
 progress::-webkit-progress-value {
-  background: #1eb4b4;
+  background: var(--main-color);
   border-radius: 20px;
 }
 
@@ -137,7 +140,6 @@ progress::-webkit-progress-value {
   transition: all ease-out 1s;
   width: 100%;
   height: 238px;
-  background-image: url('./assets/interstellar.jpg');
   background-repeat: no-repeat;
   background-position: right;
   border-radius: 0px 20px 0px 0px;
@@ -156,10 +158,10 @@ progress::-webkit-progress-value {
   text-align: center;
   line-height: 70px;
   color: white;
-  height: 70px;
+  height: 80px;
   margin-right: 40px;
   font-size: 40px;
-  width: 70px;
+  width: 80px;
   position: absolute;
   right: 0;
   border-radius: 100%;
@@ -211,7 +213,6 @@ progress::-webkit-progress-value {
   box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.1);
   height: 315px;
   width: 210px;
-  background-image: url('./assets/interstellar.jpg');
   background-size: contain;
   background-position: center;
   transition: all ease-out 0.5s;
@@ -266,11 +267,12 @@ progress::-webkit-progress-value {
   color: white;
   text-align: center;
   line-height: 74px;
+  padding-top: 17px;
+  position: relative;
   cursor: pointer;
-  border-radius: 20px;
+  border-radius: 10px;
   margin: 0 100px 50px 100px;
 }
-
 .like {
   background: #80bc64;
 }

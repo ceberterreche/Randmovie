@@ -1,0 +1,19 @@
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  text-decoration: none;
+  font-family: 'Open Sans', sans-serif;
+}
+
+body {
+  max-height: 100vh;
+  background-color: #f1f1f1 !important;
+}
+</style>
+<template>
+  <div id="app">
+    <router-view />
+  </div>
+</template>
