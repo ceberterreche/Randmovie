@@ -1,3 +1,10 @@
+<head>
+<script
+  src="https://kit.fontawesome.com/3ef7cf2c01.js"
+  crossorigin="anonymous"
+></script>
+</head>
+
 <template>
   <div class="profile">
     <div class="profile-left">
@@ -5,6 +12,43 @@
         <h2>My Movies</h2>
         <div class="myMovie-list">
           <div v-for="item in movies" :key="item.title" class="myMovie">
+            <div class="img-container">
+              <div class="delete">DELETE</div>
+              <img
+                v-bind:src="
+                  'http://image.tmdb.org/t/p/w780/' + item.poster_path
+                "
+              />
+            </div>
+
+            <h3>{{ item.title }}</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="profile-right">
+      <div class="header">
+        <h3>
+          Hello <strong>{{ user.name }} !</strong>
+        </h3>
+
+        <div class="log-out" v-on:click="logUserOut()"></div>
+      </div>
+      <div class="stats">
+        <div
+          class="stat-progress"
+          v-for="item in favorite_genres"
+          :key="item.id"
+        >
+          {{ item.name }}
+          <progress v-bind:max="nb_vote" v-bind:value="item.nb"></progress>
+        </div>
+      </div>
+
+      <div class="discover">
+        <h2>Discover</h2>
+        <div class="myMovie-list discover-list">
+          <div class="myMovie" v-for="item in movie_discover" :key="item.title">
             <img
               v-bind:src="'http://image.tmdb.org/t/p/w780/' + item.poster_path"
             />
@@ -13,65 +57,109 @@
         </div>
       </div>
     </div>
-    <div class="profile-right">
-      <div class="stats">
-        <h2>Stats</h2>
-        comedie
-        <progress max="100" value="80"></progress>
-        comedie
-        <progress max="100" value="10"></progress>
-        comedie
-        <progress max="100" value="80"></progress>
-        comedie
-        <progress max="100" value="80"></progress>
-      </div>
-
-      <div class="discover" v-on:click="getMovies()">
-        <h2>Discover</h2>
-        <div class="myMovie-list discover-list">
-          <div class="myMovie">
-            <img src="../assets/interstellar.jpg" />
-            <h3>interstellar</h3>
-          </div>
-          <div class="myMovie">
-            <img src="../assets/interstellar.jpg" />
-            <h3>interstellar</h3>
-          </div>
-          <div class="myMovie">
-            <img src="../assets/interstellar.jpg" />
-            <h3>interstellar</h3>
-          </div>
-          <div class="myMovie">
-            <img src="../assets/interstellar.jpg" />
-            <h3>interstellar</h3>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </template>
 <script>
-import swal from 'sweetalert'
+import VueJwtDecode from 'vue-jwt-decode'
 export default {
   data() {
     return {
+      user: {},
+
       movies: [],
+      genres: {},
+      favorite_genres: [],
+      movie_discover: [],
+      nb_vote: 0,
     }
   },
   methods: {
+    getUserDetails() {
+      let token = localStorage.getItem('jwt')
+      let decoded = VueJwtDecode.decode(token)
+      this.user = decoded
+    },
+    logUserOut() {
+      localStorage.removeItem('jwt')
+      this.$router.push('/')
+    },
+
     async getMovies() {
       try {
-        let response = await this.$http.get('/movie/getMovies')
-        console.log('response' + JSON.stringify(response))
+        let response = await this.$http.get('/movie/getMovies/' + this.user._id)
         this.movies = response.data
+        this.generateStats()
       } catch (err) {
-        swal('Error', 'Something Went Wrong', 'error')
-        console.log(err.response)
+        console.log(err)
+      }
+    },
+    generateStats: function() {
+      this.movies.forEach((movie) => {
+        if (movie.liked) {
+          movie.genres.forEach((genre) => {
+            this.genres.forEach((item) => {
+              if (item.name === genre) {
+                item.nb += 1
+              }
+            })
+          })
+        }
+      })
+
+      var sorted_genres = this.genres.sort(function(first, second) {
+        return second.nb - first.nb
+      })
+
+      this.favorite_genres = sorted_genres.slice(0, 6)
+      this.nb_vote = 0
+      this.favorite_genres.forEach((genre) => {
+        this.nb_vote += genre.nb
+      })
+      this.generateDiscover()
+    },
+
+    generateDiscover: async function() {
+      try {
+        await fetch(
+          'https://api.themoviedb.org/3/discover/movie?api_key=21232daa602e58908c7ddee42de408db&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=1&with_genres=' +
+            this.favorite_genres[0].id +
+            ',' +
+            this.favorite_genres[1].id
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            this.movie_discover = data.results.slice(0, 6)
+          })
+      } catch (err) {
+        console.log(err)
+      }
+    },
+
+    getAllGenres: async function() {
+      try {
+        await fetch(
+          'https://api.themoviedb.org/3/genre/movie/list?api_key=21232daa602e58908c7ddee42de408db&language=en-US'
+        )
+          .then((response) => response.json())
+          .then((data) => {
+            this.genres = data.genres
+            this.genres.forEach((genre) => {
+              genre.nb = 0
+            })
+          })
+      } catch (err) {
+        console.log(err)
       }
     },
   },
 
-  mounted() {
+  async mounted() {
+    this.$root.$on('updateProfile', () => {
+      this.getMovies()
+    })
+
+    this.getUserDetails()
+    this.getAllGenres()
     this.getMovies()
   },
 }

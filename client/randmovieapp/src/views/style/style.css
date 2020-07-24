@@ -2,6 +2,11 @@ body {
   --main-color: #1eb4b4;
 }
 
+.profile h2 {
+  font-weight: 600;
+  font-size: 25px;
+}
+
 .myMovie-list::-webkit-scrollbar {
   width: 5px;
   border-radius: 10px;
@@ -19,7 +24,7 @@ body {
 
 /* Handle on hover */
 .myMovie-list::-webkit-scrollbar-thumb:hover {
-  background: #ffcb8f;
+  background: #1b9c9c;
   border-radius: 10px;
 }
 
@@ -43,6 +48,7 @@ body {
 
 .profile-left .inner {
   box-sizing: border-box;
+  margin-top: 50px;
   padding: 40px 0 40px 40px;
   height: 100%;
 }
@@ -52,32 +58,96 @@ body {
   overflow: auto;
   flex-direction: row;
   flex-wrap: wrap;
-  height: 100%;
+  box-sizing: border-box;
+  margin: 0 0 20px 0;
+  height: 90%;
 }
 
 .myMovie {
-  padding: 20px 40px 0 0;
+  justify-content: start;
+  margin: 20px 20px 0 0;
+  width: 190px;
+}
+
+.img-container:hover {
+  cursor: pointer;
+  position: relative;
+}
+
+.img-container img:hover {
+  filter: brightness(55%);
+  transition: all ease-in-out 0.3s;
+}
+
+.delete {
+  visibility: hidden;
+  color: white;
+  position: absolute;
+  left: 60px;
+}
+
+.img-container:hover .delete {
+  visibility: visible;
+}
+
+.discover .myMovie {
+  width: 150px;
+  margin: 0 10px 0 0;
+}
+
+.discover h3 {
+  font-size: 16px;
+  margin-top: 10px;
+}
+.profile-left h3 {
+  font-size: 20px;
+  margin-top: 10px;
 }
 
 .myMovie-list img {
-  width: 230px;
+  width: 190px;
   border-radius: 10px;
 }
 
 .profile-right {
   display: flex;
+  box-sizing: border-box;
   flex-direction: column;
-  padding: 40px 90px 40px 90px;
-  margin: auto;
+  padding: 40px 20px 40px 20px;
+}
+
+.header {
+  height: 50px;
+  float: right;
+  display: flex;
+  margin-bottom: 10px;
+  flex-direction: row;
+}
+
+.header h3 {
+  line-height: 50px;
+}
+
+.log-out {
+  height: 40px;
+  background-image: url('../../assets/turn-off.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 10px;
+  cursor: pointer;
+  width: 50px;
+  margin-left: auto;
 }
 .stats {
+  height: 140px;
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
 }
 
 @media screen and (max-width: 1290px) {
   .profile {
-    flex-direction: column-reverse;
+    flex-direction: column;
   }
 
   .profile-right {
@@ -89,11 +159,17 @@ body {
   }
 }
 
+.stat-progress {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 5px;
+}
+
 .stats progress {
   border-radius: 20px !important;
   width: 200px;
   height: 15px;
-  color: green;
+
   position: relative;
 }
 
@@ -104,14 +180,14 @@ progress::-webkit-progress-bar {
 progress::-webkit-progress-value {
   background: var(--main-color);
   border-radius: 20px;
+  transition: all ease-in-out 0.3s;
 }
 
 .discover {
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .discover-list {
-  width: 100%;
 }
 
 .discover-list .myMovie img {

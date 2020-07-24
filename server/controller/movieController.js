@@ -39,8 +39,8 @@ exports.addingMovie = async (req, res) => {
 
 exports.getMovies = async (req, res) => {
   try {
-    
-    let movies = await Movie.find({ liked: true })
+    console.log(req.params.user)
+    let movies = await Movie.find({ liked: true, User: req.params.user })
     res.json(movies)
   } catch (err) {
     res.status(500).json({ err: err.message })

@@ -56,13 +56,16 @@
   </div>
 </template>
 <script>
+import VueJwtDecode from 'vue-jwt-decode'
 export default {
   data() {
     return {
+      user: {},
+
       api_movies: [],
       api_genres: [],
       current_movie: {
-        user: '',
+        User: '',
         title: '',
         poster_path: '',
         overview: '',
@@ -76,16 +79,27 @@ export default {
   },
 
   methods: {
+    getUserDetails() {
+      let token = localStorage.getItem('jwt')
+      let decoded = VueJwtDecode.decode(token)
+      this.user = decoded
+    },
+
     generateMovie: async function(liked) {
       // post the current movie
-      this.current_movie.liked = liked
-      await this.$http.post('/movie/addMovie', this.current_movie)
+      if (liked) {
+        this.current_movie.liked = liked
+        await this.$http.post('/movie/addMovie', this.current_movie)
+      }
 
+      this.$root.$emit('updateProfile')
       // generate a new movie
       this.getRandomMovie()
     },
 
     populateCurrentMovie: function(api_movie) {
+      console.log(this.user._id)
+      this.current_movie.User = this.user._id
       this.current_movie.title = api_movie.title
       this.current_movie.poster_path = api_movie.poster_path
       this.current_movie.overview = api_movie.overview
@@ -138,7 +152,6 @@ export default {
         .then((response) => response.json())
         .then((data) => {
           this.populateCurrentMovie(data.results[random_result])
-
           this.setNoteColor()
         })
         .catch((e) => {
@@ -148,6 +161,7 @@ export default {
   },
 
   async mounted() {
+    this.getUserDetails()
     // Get all movie genre
     await fetch(
       'https://api.themoviedb.org/3/genre/movie/list?api_key=21232daa602e58908c7ddee42de408db&language=en-US'
