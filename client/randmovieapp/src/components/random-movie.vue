@@ -90,9 +90,9 @@ export default {
       if (liked) {
         this.current_movie.liked = liked
         await this.$http.post('/movie/addMovie', this.current_movie)
+        this.$root.$emit('updateProfile')
       }
 
-      this.$root.$emit('updateProfile')
       // generate a new movie
       this.getRandomMovie()
     },

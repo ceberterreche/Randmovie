@@ -37,6 +37,19 @@ exports.addingMovie = async (req, res) => {
   }
 }
 
+exports.deleteMovie = async (req, res) => {
+  console.log('prout')
+  try {
+    await Movie.findOneAndDelete({
+      title: req.params.title,
+      User: req.params.user,
+    })
+    res.status(201).json(movies)
+  } catch (err) {
+    res.status(500).json({ err: err.message })
+  }
+}
+
 exports.getMovies = async (req, res) => {
   try {
     console.log(req.params.user)

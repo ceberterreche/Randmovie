@@ -13,12 +13,13 @@
         <div class="myMovie-list">
           <div v-for="item in movies" :key="item.title" class="myMovie">
             <div class="img-container">
-              <div class="delete">DELETE</div>
               <img
                 v-bind:src="
                   'http://image.tmdb.org/t/p/w780/' + item.poster_path
                 "
+                v-on:click="deleteMovie(item.title)"
               />
+              <div class="delete">DELETE</div>
             </div>
 
             <h3>{{ item.title }}</h3>
@@ -105,16 +106,19 @@ export default {
           })
         }
       })
-
+      console.log(JSON.stringify(this.genres))
       var sorted_genres = this.genres.sort(function(first, second) {
         return second.nb - first.nb
       })
 
       this.favorite_genres = sorted_genres.slice(0, 6)
+      console.log(JSON.stringify(this.favorite_genres))
       this.nb_vote = 0
       this.favorite_genres.forEach((genre) => {
         this.nb_vote += genre.nb
       })
+
+      console.log(this.nb_vote)
       this.generateDiscover()
     },
 
@@ -151,10 +155,21 @@ export default {
         console.log(err)
       }
     },
+
+    deleteMovie: async function(movie) {
+      try {
+        this.$http.delete('/movie/deleteMovie/' + this.user._id + '/' + movie)
+        this.getAllGenres()
+        this.getMovies()
+      } catch (err) {
+        console.log(err.message)
+      }
+    },
   },
 
   async mounted() {
     this.$root.$on('updateProfile', () => {
+      this.getAllGenres()
       this.getMovies()
     })
 
