@@ -106,7 +106,7 @@ export default {
           })
         }
       })
-      console.log(JSON.stringify(this.genres))
+
       var sorted_genres = this.genres.sort(function(first, second) {
         return second.nb - first.nb
       })
@@ -133,6 +133,9 @@ export default {
           .then((response) => response.json())
           .then((data) => {
             this.movie_discover = data.results.slice(0, 6)
+            console.log(
+              'favorite genre : ' + JSON.stringify(this.movie_discover)
+            ) 
           })
       } catch (err) {
         console.log(err)
