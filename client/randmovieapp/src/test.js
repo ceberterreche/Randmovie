@@ -5,7 +5,7 @@ function addition(x, y) {
     return c
   }
 
-  function addition2() {
+  function addition2(x,y) {
     let a = x + 1
     let b = x + 1
     let c = a + b
