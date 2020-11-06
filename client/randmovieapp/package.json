@@ -18,7 +18,7 @@
     "sweetalert": "^2.1.2",
     "vue": "^2.6.11",
     "vue-jwt-decode": "^0.1.0",
-    "vue-router": "^3.3.4",
+    "vue-router": "^3.4.9",
     "vuex": "^3.5.1"
   },
   "devDependencies": {
