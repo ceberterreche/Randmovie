@@ -14,7 +14,7 @@
     "axios": "^0.20.0",
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
-    "mongoose": "^5.9.25",
+    "mongoose": "^6.2.10",
     "sweetalert": "^2.1.2",
     "vue": "^2.6.11",
     "vue-jwt-decode": "^0.1.0",
