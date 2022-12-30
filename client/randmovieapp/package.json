@@ -11,7 +11,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.31",
     "@fortawesome/free-solid-svg-icons": "^5.14.0",
     "@fortawesome/vue-fontawesome": "^0.1.10",
-    "axios": "^0.20.0",
+    "axios": "^1.2.2",
     "bootstrap": "^4.5.0",
     "core-js": "^3.6.5",
     "mongoose": "^5.9.25",
